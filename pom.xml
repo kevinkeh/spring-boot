@@ -75,19 +75,6 @@
 		</dependencies>
 	</dependencyManagement>
 
-	<distributionManagement>
-		<repository>
-			<id>releases</id>
-			<name>Lsd Releases</name>
-			<url>http://maven.dev.sh.ctripcorp.com:8081/nexus/content/repositories/carrelease/</url>
-		</repository>
-		<snapshotRepository>
-			<id>snapshots</id>
-			<name>Lsd Releases</name>
-			<url>http://maven.dev.sh.ctripcorp.com:8081/nexus/content/repositories/carsnapshot/</url>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<build>
 		<plugins>
 			<plugin>
