@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.dao.db2.PermissionMapper">
+    <resultMap id="BaseResultMap" type="com.kevin.model.db2.Permission">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="pid" jdbcType="INTEGER" property="pid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="type" jdbcType="VARCHAR" property="type"/>
+        <result column="sort" jdbcType="INTEGER" property="sort"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="perm_code" jdbcType="VARCHAR" property="permCode"/>
+        <result column="icon" jdbcType="VARCHAR" property="icon"/>
+        <result column="state" jdbcType="VARCHAR" property="state"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, pid, name, type, sort, url, perm_code, icon, state, description
+  </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from osd_pm_permission
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectListByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from osd_pm_permission
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from osd_pm_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <insert id="insert" parameterType="com.kevin.model.db2.Permission">
+    insert into osd_pm_permission (id, pid, name, 
+      type, sort, url, perm_code, 
+      icon, state, description
+      )
+    values (#{id,jdbcType=INTEGER}, #{pid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, 
+      #{type,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER}, #{url,jdbcType=VARCHAR}, #{permCode,jdbcType=VARCHAR}, 
+      #{icon,jdbcType=VARCHAR}, #{state,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.kevin.model.db2.Permission">
+        insert into osd_pm_permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="pid != null">
+                pid,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="permCode != null">
+                perm_code,
+            </if>
+            <if test="icon != null">
+                icon,
+            </if>
+            <if test="state != null">
+                state,
+            </if>
+            <if test="description != null">
+                description,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="pid != null">
+                #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="permCode != null">
+                #{permCode,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                #{description,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.kevin.model.db2.Permission">
+        update osd_pm_permission
+        <set>
+            <if test="pid != null">
+                pid = #{pid,jdbcType=INTEGER},
+            </if>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="permCode != null">
+                perm_code = #{permCode,jdbcType=VARCHAR},
+            </if>
+            <if test="icon != null">
+                icon = #{icon,jdbcType=VARCHAR},
+            </if>
+            <if test="state != null">
+                state = #{state,jdbcType=VARCHAR},
+            </if>
+            <if test="description != null">
+                description = #{description,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.kevin.model.db2.Permission">
+    update osd_pm_permission
+    set pid = #{pid,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR},
+      sort = #{sort,jdbcType=INTEGER},
+      url = #{url,jdbcType=VARCHAR},
+      perm_code = #{permCode,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      state = #{state,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <select id="findPermissions" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select DISTINCT(p.id), p.* from osd_pm_permission p
+    INNER JOIN osd_pm_role_permission rp on p.ID=rp.PERMISSION_ID
+    INNER JOIN osd_pm_role r ON  r.id=rp.ROLE_ID
+    INNER JOIN osd_pm_user_role  ur ON ur.ROLE_ID =rp.ROLE_ID
+    INNER JOIN osd_pm_user u ON u.id = ur.USER_ID
+    where u.id= #{userId,jdbcType=INTEGER} order by p.sort
+  </select>
+    <select id="findMenus" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from osd_pm_permission p
+        where p.TYPE='F' order by p.sort
+    </select>
+    <select id="findMenusByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+      select p.id,p.pid,p.name,p.url,p.icon,p.sort,p.description from osd_pm_permission p
+		INNER JOIN osd_pm_role_permission rp on p.ID=rp.PERMISSION_ID
+		INNER JOIN osd_pm_role r ON r.id=rp.ROLE_ID
+		INNER JOIN osd_pm_user_role ur ON ur.ROLE_ID =rp.ROLE_ID
+		INNER JOIN user u ON u.id = ur.USER_ID
+		where p.TYPE='F' and u.id=#{userId,jdbcType=INTEGER} order by p.sort
+  </select>
+  <select id="findMenuOperationByUserId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    	select p.id,p.name,p.url,p.perm_code,p.description from osd_pm_permission p
+		where p.type='O' and p.PID=#{pid,jdbcType=INTEGER} order by p.sort
+  </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select * from osd_pm_permission
+    </select>
+    <select id="search" resultMap="BaseResultMap">
+        select * from osd_pm_permission limit #{fromParam} ,#{toParam}
+    </select>
+    <select id="findPressmionByname" resultMap="BaseResultMap">
+        select * from osd_pm_permission where name=#{name}
+    </select>
+
+
+</mapper>

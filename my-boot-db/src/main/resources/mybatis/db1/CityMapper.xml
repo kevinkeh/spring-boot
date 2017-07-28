@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.dao.db1.CityMapper">
+    <resultMap id="BaseResultMap" type="city">
+        <id column="CityId" jdbcType="INTEGER" property="cityid"/>
+        <result column="ContinentId" jdbcType="INTEGER" property="continentid"/>
+        <result column="CountryId" jdbcType="INTEGER" property="countryid"/>
+        <result column="ProvinceId" jdbcType="INTEGER" property="provinceid"/>
+        <result column="CityName" jdbcType="VARCHAR" property="cityname"/>
+        <result column="CityCode" jdbcType="VARCHAR" property="citycode"/>
+        <result column="EnglishName" jdbcType="VARCHAR" property="englishname"/>
+        <result column="FullPinYin" jdbcType="VARCHAR" property="fullpinyin"/>
+        <result column="ShortPinYin" jdbcType="VARCHAR" property="shortpinyin"/>
+        <result column="FirstChar" jdbcType="CHAR" property="firstchar"/>
+        <result column="IsCapital" jdbcType="TINYINT" property="iscapital"/>
+        <result column="IsActive" jdbcType="TINYINT" property="isactive"/>
+        <result column="SortNum" jdbcType="INTEGER" property="sortnum"/>
+        <result column="DataChange_CreateTime" jdbcType="TIMESTAMP" property="datachangeCreatetime"/>
+        <result column="DataChange_LastTime" jdbcType="TIMESTAMP" property="datachangeLasttime"/>
+        <result column="TimeZone" jdbcType="INTEGER" property="timezone"/>
+        <result column="Longitude" jdbcType="DOUBLE" property="longitude"/>
+        <result column="Latitude" jdbcType="DOUBLE" property="latitude"/>
+        <result column="ParentId" jdbcType="INTEGER" property="parentid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    CityId, ContinentId, CountryId, ProvinceId, CONCAT(CityId,' - ',CityName) CityName, CityCode, EnglishName, FullPinYin,
+    ShortPinYin, FirstChar, IsCapital, IsActive, SortNum, DataChange_CreateTime, DataChange_LastTime, 
+    TimeZone, Longitude, Latitude, ParentId
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM city
+        WHERE CityId = #{id,jdbcType=INTEGER}
+    </select>
+
+
+</mapper>

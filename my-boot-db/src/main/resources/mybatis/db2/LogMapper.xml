@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.dao.db2.LogMapper">
+  <resultMap id="BaseResultMap" type="com.kevin.model.db2.Log">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="operation_code" jdbcType="VARCHAR" property="operationCode" />
+    <result column="creater" jdbcType="VARCHAR" property="creater" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="os" jdbcType="VARCHAR" property="os" />
+    <result column="browser" jdbcType="VARCHAR" property="browser" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="mac" jdbcType="VARCHAR" property="mac" />
+    <result column="execute_time" jdbcType="INTEGER" property="executeTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="request_param" jdbcType="VARCHAR" property="requestParam" />
+    <result column="datachange_lasttime" jdbcType="TIMESTAMP" property="datachangeLasttime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, operation_code, creater, type, os, browser, ip, mac, execute_time, description, 
+    request_param, datachange_lasttime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from osd_pm_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from osd_pm_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kevin.model.db2.Log">
+    insert into osd_pm_log (id, operation_code, creater, 
+      type, os, browser, 
+      ip, mac, execute_time, 
+      description, request_param, datachange_lasttime
+      )
+    values (#{id,jdbcType=INTEGER}, #{operationCode,jdbcType=VARCHAR}, #{creater,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{os,jdbcType=VARCHAR}, #{browser,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{mac,jdbcType=VARCHAR}, #{executeTime,jdbcType=INTEGER}, 
+      #{description,jdbcType=VARCHAR}, #{requestParam,jdbcType=VARCHAR}, #{datachangeLasttime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.kevin.model.db2.Log">
+    insert into osd_pm_log
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="operationCode != null">
+        operation_code,
+      </if>
+      <if test="creater != null">
+        creater,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="os != null">
+        os,
+      </if>
+      <if test="browser != null">
+        browser,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="mac != null">
+        mac,
+      </if>
+      <if test="executeTime != null">
+        execute_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="requestParam != null">
+        request_param,
+      </if>
+      <if test="datachangeLasttime != null">
+        datachange_lasttime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="operationCode != null">
+        #{operationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="os != null">
+        #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="executeTime != null">
+        #{executeTime,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParam != null">
+        #{requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="datachangeLasttime != null">
+        #{datachangeLasttime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kevin.model.db2.Log">
+    update osd_pm_log
+    <set>
+      <if test="operationCode != null">
+        operation_code = #{operationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="creater != null">
+        creater = #{creater,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="os != null">
+        os = #{os,jdbcType=VARCHAR},
+      </if>
+      <if test="browser != null">
+        browser = #{browser,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="mac != null">
+        mac = #{mac,jdbcType=VARCHAR},
+      </if>
+      <if test="executeTime != null">
+        execute_time = #{executeTime,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="requestParam != null">
+        request_param = #{requestParam,jdbcType=VARCHAR},
+      </if>
+      <if test="datachangeLasttime != null">
+        datachange_lasttime = #{datachangeLasttime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kevin.model.db2.Log">
+    update osd_pm_log
+    set operation_code = #{operationCode,jdbcType=VARCHAR},
+      creater = #{creater,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      os = #{os,jdbcType=VARCHAR},
+      browser = #{browser,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      mac = #{mac,jdbcType=VARCHAR},
+      execute_time = #{executeTime,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      request_param = #{requestParam,jdbcType=VARCHAR},
+      datachange_lasttime = #{datachangeLasttime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+  select * from osd_pm_log
+</select>
+  <select id="search" resultMap="BaseResultMap">
+      select * from osd_pm_log ORDER BY datachange_lasttime DESC limit #{fromParam} ,#{toParam}
+  </select>
+  <delete id="deleteBatch" parameterType="java.util.List" >
+    delete from osd_pm_log where id in
+    <foreach collection="list" item="item" index="index" open="("  separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+  <select id="searchLogList" parameterType="com.kevin.model.db2.Log" resultType="com.kevin.model.db2.Log">
+    SELECT
+    *
+    FROM
+    osd_pm_log g
+    WHERE
+    1 = 1
+    <if test="operationCode != '' and operationCode!=null">
+      AND g.operation_code =#{operationCode}
+    </if>
+    <if test="operationCode != '' and operationCode!=null">
+      AND g.description =#{description}
+    </if>
+    <if test="starTime != '' and starTime!=null  and endTime!='' and endTime!=null">
+      and g.datachange_lasttime between TRIM(#{starTime}) and TRIM(#{endTime})
+    </if>
+    ORDER BY datachange_lasttime DESC LIMIT #{from},#{to}
+  </select>
+  <select id="selectTotalCount" parameterType="com.kevin.model.db2.Log" resultType="java.lang.Integer">
+    SELECT
+    count(1)
+    FROM
+    osd_pm_log g
+    WHERE
+    1 = 1
+    <if test="operationCode != '' and operationCode!=null">
+      AND g.operation_code =#{operationCode}
+    </if>
+    <if test="operationCode != '' and operationCode!=null">
+      AND g.description =#{description}
+    </if>
+    <if test="starTime != '' and starTime!=null  and endTime!='' and endTime!=null">
+      and g.datachange_lasttime between TRIM(#{starTime}) and TRIM(#{endTime})
+    </if>
+  </select>
+  <select id="getTotalCount" resultType="java.lang.Integer">
+    SELECT
+	count(1)
+    FROM
+	osd_pm_log g
+  </select>
+</mapper>

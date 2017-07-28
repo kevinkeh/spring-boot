@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kevin.dao.db2.OrganizationMapper">
+  <resultMap id="BaseResultMap" type="com.kevin.model.db2.Organization">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="org_name" jdbcType="VARCHAR" property="orgName" />
+    <result column="pid" jdbcType="INTEGER" property="pid" />
+    <result column="org_type" jdbcType="VARCHAR" property="orgType" />
+    <result column="org_sort" jdbcType="INTEGER" property="orgSort" />
+    <result column="org_level" jdbcType="INTEGER" property="orgLevel" />
+    <result column="org_code" jdbcType="VARCHAR" property="orgCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, org_name, pid, org_type, org_sort, org_level, org_code
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from osd_pm_organization
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from osd_pm_organization
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.kevin.model.db2.Organization">
+    insert into osd_pm_organization (id, org_name, pid, 
+      org_type, org_sort, org_level, 
+      org_code)
+    values (#{id,jdbcType=INTEGER}, #{orgName,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, 
+      #{orgType,jdbcType=VARCHAR}, #{orgSort,jdbcType=INTEGER}, #{orgLevel,jdbcType=INTEGER}, 
+      #{orgCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.kevin.model.db2.Organization">
+    insert into osd_pm_organization
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orgName != null">
+        org_name,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+      <if test="orgType != null">
+        org_type,
+      </if>
+      <if test="orgSort != null">
+        org_sort,
+      </if>
+      <if test="orgLevel != null">
+        org_level,
+      </if>
+      <if test="orgCode != null">
+        org_code,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orgName != null">
+        #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="orgType != null">
+        #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSort != null">
+        #{orgSort,jdbcType=INTEGER},
+      </if>
+      <if test="orgLevel != null">
+        #{orgLevel,jdbcType=INTEGER},
+      </if>
+      <if test="orgCode != null">
+        #{orgCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.kevin.model.db2.Organization">
+    update osd_pm_organization
+    <set>
+      <if test="orgName != null">
+        org_name = #{orgName,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="orgType != null">
+        org_type = #{orgType,jdbcType=VARCHAR},
+      </if>
+      <if test="orgSort != null">
+        org_sort = #{orgSort,jdbcType=INTEGER},
+      </if>
+      <if test="orgLevel != null">
+        org_level = #{orgLevel,jdbcType=INTEGER},
+      </if>
+      <if test="orgCode != null">
+        org_code = #{orgCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.kevin.model.db2.Organization">
+    update osd_pm_organization
+    set org_name = #{orgName,jdbcType=VARCHAR},
+      pid = #{pid,jdbcType=INTEGER},
+      org_type = #{orgType,jdbcType=VARCHAR},
+      org_sort = #{orgSort,jdbcType=INTEGER},
+      org_level = #{orgLevel,jdbcType=INTEGER},
+      org_code = #{orgCode,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from osd_pm_organization
+  </select>
+  <select id="search" resultMap="BaseResultMap">
+    select * from osd_pm_organization limit #{fromParam} ,#{toParam}
+  </select>
+</mapper>

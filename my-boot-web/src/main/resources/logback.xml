@@ -1,0 +1,23 @@
+<?xml version="1.1" encoding="UTF-8"?>
+<configuration>
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+		</encoder>
+	</appender>
+
+    <!--Output to central logging-->
+    <appender name="centralLogging"
+              class="com.ctrip.framework.clogging.agent.appender.CLoggingTagAppender">
+    </appender>
+
+	<logger name="dao" level="DEBUG" additivity="false">
+		<appender-ref ref="console" />
+        <appender-ref ref="centralLogging" />
+	</logger>
+
+    <root level="ERROR">
+        <appender-ref ref="console" />
+        <appender-ref ref="centralLogging" />
+    </root>
+</configuration>
