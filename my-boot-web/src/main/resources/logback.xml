@@ -6,18 +6,12 @@
 		</encoder>
 	</appender>
 
-    <!--Output to central logging-->
-    <appender name="centralLogging"
-              class="com.ctrip.framework.clogging.agent.appender.CLoggingTagAppender">
-    </appender>
 
 	<logger name="dao" level="DEBUG" additivity="false">
 		<appender-ref ref="console" />
-        <appender-ref ref="centralLogging" />
 	</logger>
 
     <root level="ERROR">
         <appender-ref ref="console" />
-        <appender-ref ref="centralLogging" />
     </root>
 </configuration>
