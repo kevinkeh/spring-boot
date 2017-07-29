@@ -39,11 +39,6 @@
             <optional>true</optional>
         </dependency>
 
-        <dependency>
-            <groupId>com.ctrip.platform</groupId>
-            <artifactId>ctrip-datasource</artifactId>
-        </dependency>
-
         <!-- 代码直接调用log4j会被桥接到slf4j -->
         <dependency>
             <groupId>ch.qos.logback</groupId>
