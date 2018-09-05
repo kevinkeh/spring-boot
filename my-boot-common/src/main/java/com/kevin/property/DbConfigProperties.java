@@ -1,12 +1,14 @@
 package com.kevin.property;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 /**
  * @author geyh
  * @create 2017-07-28 14:56
  */
 @ConfigurationProperties(prefix = "dbconfig")
+@Component
 public class DbConfigProperties {
 
     private DbInfo db1;

@@ -1,5 +1,7 @@
 package com.kevin.config;
 
+import com.kevin.mybatis.page.PaginationResultSetHandlerInterceptor;
+import com.kevin.mybatis.page.PaginationStatementHandlerInterceptor;
 import com.kevin.property.DbConfigProperties;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.ibatis.session.Configuration;
@@ -50,11 +52,16 @@ public class MybatisConfigSupport {
         sqlSessionFactoryBean.setDataSource(dataSource);
         sqlSessionFactoryBean.setTypeAliasesPackage(dbInfo.getTypeAliasesPackage());
         sqlSessionFactoryBean.setMapperLocations(this.resolveMapperLocations(dbInfo.getMapperLocations()));
+        sqlSessionFactoryBean.setTypeHandlersPackage(mybatisProperties.getTypeHandlersPackage());
         Configuration configuration = new Configuration();
         if (mybatisProperties.getConfiguration() != null) {
             BeanUtils.copyProperties(mybatisProperties.getConfiguration(), configuration);
         }
+        //设置interceptor
+        configuration.addInterceptor(new PaginationStatementHandlerInterceptor());
+        configuration.addInterceptor(new PaginationResultSetHandlerInterceptor());
         sqlSessionFactoryBean.setConfiguration(configuration);
+        sqlSessionFactoryBean.setConfigurationProperties(mybatisProperties.getConfigurationProperties());
         return sqlSessionFactoryBean;
     }
 
@@ -73,7 +80,7 @@ public class MybatisConfigSupport {
             } catch (IOException e) {// ignore}
             }
         }
-        return resources.toArray(new Resource[resources.size()]);
+        return resources.toArray(new Resource[0]);
     }
 
 }

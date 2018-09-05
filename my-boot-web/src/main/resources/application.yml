@@ -2,6 +2,9 @@
 mybatis:
     configuration:
         map-underscore-to-camel-case: true
+    configuration-properties:
+        dialectClass:com.kevin.mybatis.dialect.MySql5Dialect
+    type-handlers-package: com.kevin.mybatis.handler
 ## datasource config
 dbconfig:
     db1:
